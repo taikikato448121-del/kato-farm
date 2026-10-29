@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<style>
+#snow {
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 9999;
+overflow: hidden;
+}
+.snow-particle {
+position: absolute;
+top: -10px;
+color: white;
+opacity: 0.8;
+animation: fall linear infinite;
+}
+@keyframes fall {
+to {
+transform: translateY(110vh);
+  }
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="株式会社加藤農場。農業・草刈りを通じて地域の暮らしと農地を支えます。">
@@ -169,6 +190,20 @@ nav a { margin: 0 6px; }
 <p>お問い合わせ先は、準備ができ次第掲載します。</p>
 </section>
 </main>
+<div id="snow"></div>
+<script>
+const snow = document.getElementById("snow");
+for (let i = 0; i < 35; i++) {
+const p = document.createElement("span");
+p.className = "snow-particle";
+p.textContent = "•";
+p.style.left = Math.random() * 100 + "vw";
+p.style.animationDuration = (5 + Math.random() * 8) + "s";
+p.style.animationDelay = (-Math.random() * 10) + "s";
+p.style.fontSize = (5 + Math.random() * 10) + "px";
+snow.appendChild(p);
+}
+</script>
 
 <footer>
 &copy; 株式会社加藤農場 All Rights Reserved.
