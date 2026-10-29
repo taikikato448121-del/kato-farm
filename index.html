@@ -14,8 +14,11 @@ position: absolute;
 top: -10px;
 color: #00cc66;
 opacity: 0.8;
-front-size: 24px;
-animation: fall 1s linear infinite;
+width: 24px;
+height: 24px;
+background: #00cc66;
+border-tadius: 50%;
+animation: fall 1s linear forwards;
 }
 @keyframes fall {
 to {
@@ -197,7 +200,7 @@ const snow = document.getElementById("snow");
 for (let i = 0; i < 35; i++) {
 const p = document.createElement("span");
 p.className = "snow-particle";
-p.textContent = "•";
+p.textContent = "";
 p.style.left = Math.random() * 100 + "vw";
 p.style.animationDuration = "1s";
 p.style.animationDelay = "0s";
