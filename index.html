@@ -12,9 +12,10 @@ overflow: hidden;
 .snow-particle {
 position: absolute;
 top: -10px;
-color: white;
+color: #00cc66;
 opacity: 0.8;
-animation: fall linear infinite;
+front-size: 24px;
+animation: fall 1s linear infinite;
 }
 @keyframes fall {
 to {
@@ -198,9 +199,9 @@ const p = document.createElement("span");
 p.className = "snow-particle";
 p.textContent = "•";
 p.style.left = Math.random() * 100 + "vw";
-p.style.animationDuration = (5 + Math.random() * 8) + "s";
-p.style.animationDelay = (-Math.random() * 10) + "s";
-p.style.fontSize = (5 + Math.random() * 10) + "px";
+p.style.animationDuration = "1s";
+p.style.animationDelay = "0s";
+p.style.fontSize = "30px";
 snow.appendChild(p);
 }
 </script>
