@@ -2,25 +2,128 @@
 <html lang="ja">
 <head>
 <style>
-#snow {
+#opening {
 position: fixed;
 inset: 0;
-pointer-events: none;
-z-index: 9999;
+z-index: 99999;
+background: #f7f6ef;
 overflow: hidden;
-｝
-.snow-particle {
-position: absolute;
-top: -30px;
-opacity: 0.9;
-animation: fall 1s linear forwards;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: opacity 3s ease;
 }
+
+#opening-logo {
+width: 260px;
+max-width: 65vw;
+z-index: 2;
+transition: opacity 2s ease;
+}
+
+.grain {
+position: absolute;
+top: -60px;
+width: auto;
+height: auto;
+max-width: 35px;
+object-fit: contain;
+animation: fall linear forwards;
+pointer-events: none;
+}
+
 @keyframes fall {
 to {
-transform: translateY(110vh);
-  }
+transform: translate(
+var(--sway), 115vh
+) rotate(var(--rotation));
+}
+}
+
+#opening.hide {
+opacity: 0;
+pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+#opening, #opening-logo {
+transition: none;
+}
 }
 </style>
+
+<div id="opening">
+<img id="opening-logo" src="logo.png" alt="会社ロゴ">
+</div>
+
+<script>
+(() => {
+const opening = document.getElementById("opening");
+const logo = document.getElementById("opening-logo");
+
+const grains = [
+"rice.png",
+"wheat.png",
+"soybean.png"
+];
+
+function createGrain() {
+if (!opening.isConnected) return;
+
+const grain = document.createElement("img");
+
+grain.className = "grain";
+grain.src = grains[
+Math.floor(Math.random() * grains.length)
+];
+
+const duration = 4 + Math.random() * 4;
+
+grain.style.left = Math.random() * 100 + "vw";
+grain.style.width = (12 + Math.random() * 20) + "px";
+grain.style.animationDuration = duration + "s";
+
+grain.style.setProperty(
+"--sway",
+(Math.random() * 200 - 100) + "px"
+);
+
+grain.style.setProperty(
+"--rotation",
+(Math.random() * 720 - 360) + "deg"
+);
+
+opening.appendChild(grain);
+
+setTimeout(() => grain.remove(), duration * 1000);
+}
+
+// 最初から大量に降らせる
+for (let i = 0; i < 100; i++) {
+setTimeout(createGrain, Math.random() * 3000);
+}
+
+// 追加で降らせる
+const rain = setInterval(createGrain, 100);
+
+// ロゴをゆっくり消す
+setTimeout(() => {
+logo.style.opacity = "0";
+}, 4500);
+
+// ホームページを見せる
+setTimeout(() => {
+clearInterval(rain);
+opening.classList.add("hide");
+}, 6500);
+
+// オープニング画面を削除
+setTimeout(() => {
+opening.remove();
+}, 9500);
+
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="株式会社加藤農場。農業・草刈りを通じて地域の暮らしと農地を支えます。">
