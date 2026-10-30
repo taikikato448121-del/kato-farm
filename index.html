@@ -292,20 +292,7 @@ nav a { margin: 0 6px; }
 <p>お問い合わせ先は、準備ができ次第掲載します。</p>
 </section>
 </main>
-<div id="snow"></div>
-<script>
-const snow = document.getElementById("snow");
-for (let i = 0; i < 30; i++) {
-const p = document.createElement("span");
-p.className = "snow-particle";
-const type = Math.floor(Math.random() * 3);
-p.textContent = ["🌾", "🌾", "🌱"][Math.floor(Math.random() * 3)];
-p.style.left = Math.random() * 95 + "vw";
-p.style.animationDuration = "1s";
-p.style.animationDelay = (i*0.1) + "s";
-p.style.fontSize = "32px";
-snow.appendChild(p);
-}
+
 </script>
 
 <footer>
