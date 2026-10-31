@@ -269,11 +269,32 @@ nav a { margin: 0 6px; }
 <h2>仕事の風景</h2>
 <p class="lead">日々の仕事や現場の様子をご紹介します。</p>
 <div class="photo-note">
-
-<img src="KIMG2757.JPG" alt="稲刈り作業" style="width:100%; max-width:400px; height:auto; border-radius:12px; margin-top:20px;">
-<img src="KIMG1595.JPG" alt="豆刈り作業" style="width:100%; max-width:400px; height:auto; border-radius:12px; margin-top:20px;">
-  
+<div class="photo-slider">
+<img src="KIMG2757.JPG" alt="稲刈り作業">
+<img src="KIMG1595.JPG" alt="豆刈り作業">
 </div>
+</div>
+
+<style>
+.photo-slider {
+display: flex;
+gap: 15px;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+padding: 10px 0 20px;
+-webkit-overflow-scrolling: touch;
+}
+
+.photo-slider img {
+flex: 0 0 85%;
+width: 85%;
+max-width: 400px;
+height: 280px;
+object-fit: cover;
+border-radius: 12px;
+scroll-snap-align: center;
+}
+</style>
 </section>
 
 <section id="company">
