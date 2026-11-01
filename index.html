@@ -808,33 +808,57 @@ document.getElementById("modal-image").src = "";
   <a href="#contact">お問い合わせ</a>
 </nav>
 
-<div class="footer-top">
-<a href="#top" aria-label="ページの先頭へ">⌃</a>
-</div>
 <footer>
 &copy; 株式会社加藤農場 All Rights Reserved.
 </footer>
-<a href="https://www.instagram.com/k.noujou/"
+<div class="fixed-buttons">
+ 
+ <a href="https://www.instagram.com/k.noujou/"
    target="_blank"
    rel="noopener noreferrer"
    class="instagram-fixed">
   Instagram
-</a>
+ </a>
+
+ <a href="#top" 
+  class="page-top-button"
+  aria-label="ページの先頭へ">
+  ⌃
+ </a>
+
+</div>
 
 <style>
-.instagram-fixed {
+ .fixed-buttons {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  z-index: 100000;
-  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-  color: white;
-  padding: 12px 18px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+ }
+
+.instagram-button {
+ background: #C13584;
+ color: white;
+ padding: 12px 18px;
+ border-radius: 30px;
+ text-decoration: none;
+ font-size: 14px;
+}
+
+.page-top-button {
+ width: 45px;
+ height: 45px;
+ background: #426B3C;
+ color: white;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-decoration: none;
+ font-size: 28px;
 }
 </style>
 
