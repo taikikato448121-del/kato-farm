@@ -274,7 +274,40 @@ nav a { margin: 0 6px; }
 <img src="KIMG1595.JPG" alt="豆刈り作業">
 </div>
 </div>
+<div id="photo-modal" onclick="closePhoto()">
+<span class="photo-close">×</span>
+<img id="modal-image" src="" alt="拡大写真">
+</div>
+#photo-modal {
+display: none;
+position: fixed;
+inset: 0;
+z-index: 100001;
+background: rgba(0, 0, 0, 0.92);
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
 
+#photo-modal.show {
+display: flex;
+}
+
+#modal-image {
+max-width: 95%;
+max-height: 85vh;
+object-fit: contain;
+border-radius: 8px;
+}
+
+.photo-close {
+position: absolute;
+top: 15px;
+right: 25px;
+color: white;
+font-size: 45px;
+cursor: pointer;
+}
 <style>
 .photo-slider {
 display: flex;
@@ -443,5 +476,20 @@ scroll-snap-align: center;
 }
 
 </style>
+<script>
+document.querySelectorAll(".photo-slider img").forEach(img => {
+img.style.cursor = "pointer";
+
+img.addEventListener("click", function() {
+document.getElementById("modal-image").src = this.src;
+document.getElementById("photo-modal").classList.add("show");
+});
+});
+
+function closePhoto() {
+document.getElementById("photo-modal").classList.remove("show");
+document.getElementById("modal-image").src = "";
+}
+</script>
 </body>
 </html>
