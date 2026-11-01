@@ -222,7 +222,7 @@ nav a { margin: 0 6px; }
 }
 </style>
 </head>
-<body>
+<body id="top">
 <div class="photo-section">
 <img src="kato_f_fix-01.jpg" style="width:60%; height:auto; display:block; margin:0 auto;">
 </div>
@@ -730,6 +730,84 @@ padding: 17px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.25);
 }
 
+.footer-menu {
+ max-width: 900px;
+ margin: 0 auto;
+ padding: 70px 7% 40px;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 35px 30px;
+ background: #fff;
+}
+
+.footer-menu a {
+ color: #78b936;
+ font-size: 21px;
+ letter-spacing: 1.5px;
+ text-decoration: none;
+ font-weight: 500;
+ transition: 0.3s;
+}
+
+.footer-menu a:hover {
+ opacity: 0.6;
+ transform: translateX(5px);
+}
+
+ .footer-menu a::before {
+ content: "›";
+ margin-right: 12px;
+}
+
+.footer-top {
+ max-width: 900px;
+ margin: 20px auto 50px;
+ padding: 0 7%;
+ display: flex;
+ justify-content: flex-end;
+}
+
+.footer-top a {
+ width: 85px;
+ height: 85px;
+ border-radius: 50%;
+ background: #80bc32;
+ color: white;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: 38px;
+ text-decoration: none;
+}
+
+.footer-copyright {
+ border-top: 1px solid #eee;
+ padding: 25px 10px;
+ text-align: center;
+ color: #888;
+ font-size: 12px;
+}
+
+@media (max-width: 600px) {
+ .footer-menu {
+  padding: 55px 8% 30px;
+  gap: 30px 12px;
+ }
+
+ .footer-menu a {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+ }
+
+ .footer-menu a::before {
+  margin-right: 6px;
+ }
+
+ .footer-top a {
+  width: 70px;
+  height: 70px;
+ }
+}
 </style>
 <script>
 document.querySelectorAll(".photo-slider img").forEach(img => {
@@ -746,5 +824,25 @@ document.getElementById("photo-modal").classList.remove("show");
 document.getElementById("modal-image").src = "";
 }
 </script>
+<footer>
+ <nav class="footer-menu">
+  <a href="#top">HOME</a>
+  <a href="#about">私たちについて</a>
+  <a href="#service">事業内容</a>
+  <a href="#company">会社概要</a>
+  <a href="#job">採用情報</a>
+  <a href="#contact">お問い合わせ</a>
+
+</nav>
+
+<div class="footer-top">
+<a href="#top" aria-label="ページの先頭へ">⌃</a>
+</div>
+
+<div class="footer-copyright">
+© 株式会社加藤農場 All Rights Reserved.
+</div>
+
+</footer>
 </body>
 </html>
