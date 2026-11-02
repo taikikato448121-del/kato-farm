@@ -220,16 +220,7 @@ header { justify-content: center; }
 nav a { margin: 0 6px; }
 .hero { padding: 65px 6%; }
 }
- .rice-stalk {
-  position: absolute;
-  width: 60%;
-  height: auto;
-  left: 50%;
-  top: 0;
-  transform-origin: 50% 85%;
-  animation: rice-sway 3s ease-in-out infinite;
- }
-
+ 
  @keyframes rice-sway {
   0%, 100% {
    transform: translateX(-50%) rotate(-2deg);
@@ -242,6 +233,7 @@ nav a { margin: 0 6px; }
  position: relative;
  width: 60%;
  margin: 0 auto;
+ line-height: 0;
 }
 
 .logo-base {
@@ -251,9 +243,14 @@ nav a { margin: 0 6px; }
 }
 
 .logo-container .rice-stalk {
+ position: absolute;
  width: 100%;
  height: 100%;
+ left: 0;
+ top: 0;
  object-fit: contain;
+ transform-origin: 50% 85%;
+ animation: rice-sway 3s ease-in-out infinite;
 }
 </style>
 </head>
