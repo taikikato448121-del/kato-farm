@@ -220,11 +220,47 @@ header { justify-content: center; }
 nav a { margin: 0 6px; }
 .hero { padding: 65px 6%; }
 }
+ .rice-stalk {
+  position: absolute;
+  width: 60%;
+  height: auto;
+  left: 50%;
+  top: 0;
+  transform-origin: 50% 85%;
+  animation: rice-sway 3s ease-in-out infinite;
+ }
+
+ @keyframes rice-sway {
+  0%, 100% {
+   transform: translateX(-50%) rotate(-2deg);
+  }
+  50% {
+   transform: translateX(-50%) rotate(2deg);
+  }
+ }
+.logo-container {
+ position: relative;
+ width: 60%;
+ margin: 0 auto;
+}
+
+.logo-base {
+ display: block;
+ width: 100%;
+ height: auto;
+}
+
+.logo-container .rice-stalk {
+ width: 100%;
+ height: 100%;
+ object-fit: contain;
+}
 </style>
 </head>
 <body id="top">
-<div class="photo-section">
-<img src="kato_f_fix-01.jpg" style="width:60%; height:auto; display:block; margin:0 auto;">
+<div class="photo-section logo-container">
+ <img src="logo-base.png" class="logo-base">
+ <img src="rice-stalk.png" class="rice-stalk">
 </div>
 <header>
 <strong>株式会社加藤農場</strong>
