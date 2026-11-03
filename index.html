@@ -221,20 +221,25 @@ nav a { margin: 0 6px; }
 .hero { padding: 65px 6%; }
 }
  
- @keyframes rice-sway {
-  0%, 100% {
-   transform: translateX(-50%) rotate(-2deg);
+@keyframes rice-sway {
+  0% {
+    transform: translateX(-50%) rotate(-1deg);
   }
-  50% {
-   transform: translateX(-50%) rotate(2deg);
+  25% {
+    transform: translateX(-50%) rotate(2deg);
   }
- }
-.logo-container {
- position: relative;
- width: 80%;
- max-width:200px;
- margin: 0 0 0 10%;
- line-height: 0;
+  45% {
+    transform: translateX(-50%) rotate(3deg);
+  }
+  70% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
+  85% {
+    transform: translateX(-50%) rotate(-2deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
 }
 
 .logo-container > img:first-child {
@@ -253,7 +258,7 @@ nav a { margin: 0 6px; }
  object-fit: contain;
  transform: translateX(-50%);
  transform-origin: 50% 85%;
- animation: rice-sway 3s ease-in-out infinite;
+ animation: rice-sway 5s ease-in-out infinite;
 }
 </style>
 </head>
