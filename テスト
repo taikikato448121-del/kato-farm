@@ -1,1 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<style>
+#opening {
+position: fixed;
+inset: 0;
+z-index: 99999;
+background: #f7f6ef;
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: opacity 3s ease;
+}
 
+#opening-logo {
+width: 260px;
+max-width: 65vw;
+z-index: 2;
+transition: opacity 2s ease;
+}
+
+.grain {
+position: absolute;
+top: -60px;
+width: auto;
+height: auto;
+max-width: 35px;
+object-fit: contain;
+animation: fall linear forwards;
+pointer-events: none;
+}
+
+@keyframes fall {
+to {
+transform: translate(
+var(--sway), 115vh
+) rotate(var(--rotation));
+}
+}
+
+#opening.hide {
+opacity: 0;
+pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+#opening, #opening-logo {
+transition: none;
+}
+}
+</style>
+
+<div id="opening">
+<img id="opening-logo" src="スクリーンショット 2024-02-28 084242.png" alt="会社ロゴ">
+</div>
+
+<script>
+(() => {
+const opening = document.getElementById("opening");
+const logo = document.getElementById("opening-logo");
+
+const grains = [
+"画像1kome.png",
+"画像2mugi.png",
+"画像3daizu.png"
+];
+
+function createGrain() {
+if (!opening.isConnected) return;
+
+const grain = document.createElement("img");
+
+grain.className = "grain";
+grain.src = grains[
+Math.floor(Math.random() * grains.length)
+];
+
+const duration = 4 + Math.random() * 4;
+
+grain.style.left = Math.random() * 100 + "vw";
+grain.style.width = (12 + Math.random() * 20) + "px";
+grain.style.animationDuration = duration + "s";
+
+grain.style.setProperty(
+"--sway",
+(Math.random() * 200 - 100) + "px"
+);
+
+grain.style.setProperty(
+"--rotation",
+(Math.random() * 720 - 360) + "deg"
+);
+
+opening.appendChild(grain);
+
+setTimeout(() => grain.remove(), duration * 1000);
+}
+
+// 最初から大量に降らせる
+for (let i = 0; i < 100; i++) {
+setTimeout(createGrain, Math.random() * 3000);
+}
+
+// 追加で降らせる
+const rain = setInterval(createGrain, 100);
+
+// ロゴをゆっくり消す
+setTimeout(() => {
+logo.style.opacity = "0";
+}, 4500);
+
+// ホームページを見せる
+setTimeout(() => {
+clearInterval(rain);
+opening.classList.add("hide");
+}, 6500);
+
+// オープニング画面を削除
+setTimeout(() => {
+opening.remove();
+}, 9500);
+
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社加藤農場｜農業・四日市</title>
+<meta name="description" content="株式会社加藤農場は三重県四日市市を拠点に、米・麦・大豆栽培管理などの農作業を行っています。">
+<meta name="robots" content="index, follow">
+<meta property="og:site_name" content="株式会社加藤農場">
+  
+<style>
+* { box-sizing: border-box; }
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+body {
+margin: 0;
+font-family: sans-serif;
+color: #26352b;
+line-height: 1.8;
+background: #fff;
+}
+header {
+padding: 22px 7%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 12px;
+background: #fff;
+}
+header strong { font-size: 20px; }
+nav a {
+margin-left: 16px;
+color: #26352b;
+text-decoration: none;
+font-size: 14px;
+}
+.hero {
+  padding: 40px 8%;
+  text-align: center;
+  background: #fff;
+}
+.hero .button {
+  display: table;
+  margin: 0 auto;
+  padding: 14px 35px;
+  background: #315d3b;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.hero h1 {
+font-size: clamp(28px, 5vw, 46px);
+line-height: 1.5;
+margin: 0 0 20px;
+}
+.hero p { font-size: 17px; }
+.button {
+display: inline-block;
+margin-top: 20px;
+padding: 12px 28px;
+background: #315d3b;
+color: white;
+text-decoration: none;
+border-radius: 5px;
+}
+section {
+padding: 60px 8%;
+max-width: 1100px;
+margin: auto;
+}
+h2 {
+font-size: 28px;
+text-align: center;
+margin-bottom: 12px;
+}
+.lead {
+text-align: center;
+color: #667267;
+margin-bottom: 35px;
+}
+.services {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 22px;
+}
+.service {
+padding: 25px;
+background: #f5f7f3;
+border-radius: 8px;
+}
+.service h3 { color: #315d3b; }
+.photo-note {
+padding: 30px;
+text-align: center;
+background: #f5f7f3;
+border: 1px dashed #9aaa96;
+border-radius: 8px;
+}
+#company { background: #f8f9f6; }
+.contact { text-align: center; }
+footer {
+padding: 25px;
+text-align: center;
+color: white;
+background: #263f2d;
+font-size: 13px;
+}
+@media (max-width: 600px) {
+header { justify-content: center; }
+nav a { margin: 0 6px; }
+.hero { padding: 65px 6%; }
+}
+ 
+@keyframes rice-sway {
+  0%, 100% {
+    transform: translateX(-50%) rotate(-2deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(2deg);
+  }
+}
+
+.logo-container > img:first-child {
+ display: block;
+ width: 70%;
+ margin-left: 10%;
+ height: auto;
+ margin-top: 10px;
+}
+
+.logo-container .稲穂 {
+ position: absolute;
+ width: 35%;
+ height: auto;
+ left: 19%;
+ top: -15%;
+ object-fit: contain;
+ transform: translateX(-50%);
+ transform-origin: 50% 85%;
+ animation: rice-sway 3s ease-in-out infinite;
+}
+@media (max-width: 600px) {
+  .logo-container .稲穂 {
+    width: 35%;
+    left: 19%;
+    top: -3%;
+  }
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "株式会社加藤農場",
+  "url": "https://kato-farm-mie.com/",
+  "telephone": "090-4409-6693",
+  "address": {
+   "@type": "PostalAddress",
+   "streetAddress": "上海老町2145",
+   "addressLocality": "四日市市",
+   "addressRegion": "三重県",
+   "addressCountry": "JP"
+ },
+ "sameAs": [
+    "https://www.instagram.com/k.noujou/"
+ ]
+}
+</script>
+  <link rel="icon" type="image/jpeg" href="/favicon.jpeg">
+</head>
+<body id="top">
+<div class="photo-section logo-container">
+ <img src="稲穂以外 (1).png" class="稲穂以外 (1).png" alt="株式会社加藤農場のロゴ">
+ <img src="稲穂.png" class="稲穂" alt="ロゴに重ねた稲穂のイラスト">
+</div>
+<header>
+<h1 class="visually-hidden">三重県四日市市の株式会社加藤農場</h1>
+<nav>
+<a href="#about">私たちについて</a>
+<a href="#service">事業内容</a>
+<a href="#company">会社概要</a>
+<a href="#job">採用情報</a>
+<a href="#contact">お問い合わせ</a>
+</nav>
+</header>
+</header>
+
+<div class="photo-section">
+  <img
+    src="会社風景.jpeg"
+    alt="株式会社加藤農場の農地風景"
+    class="hero-main-image">
+</div>
+
+<div class="hero">
+  <a class="button" href="#service">事業内容を見る</a>
+</div>
+<style>
+.photo-section {
+  width: 100%;
+  max-width: 100%
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hero-main-image {
+  display: block;
+  width: 100%;
+  max-width: 100%
+  height: 850px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 600px) {
+  .hero-main-image {
+    width: 100%
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+}
+</style>
+<main>
+<section id="about">
+<h2>私たちについて</h2>
+<p class="lead">地域に根ざし、丁寧な仕事を大切に。</p>
+<p>私たち「加藤農場」は、三重県の四日市市で水稲・小麦・大豆・露地野菜の生産・販売、農地請負、農作業代行などの事業をおこなっています。四日市市は三重県北部に位置している県の産業中心地。私たちはここで155haほどの広大な農地で、業務用のお米、種子用及び食用の小麦、種子用及び食用の大豆、それら穀物以外に露地野菜も生産しています。販売先としては農作業の請負先、個人の消費者さん、大手卸売店、外食店(株式会社おにぎりの桃太郎等)などで幅広いお付き合いがある私たち。農地の請負もおこなっており、作業のしにくい土地や農業ができなくなった農家の方の大切な土地を預かり、地域の農地保全に取り組んでいます。農作業代行業務では丁寧で早い作業を心がけており、地域の農地を荒らさずに、次の世代へ渡したいという考えのもと事業を営んでいます。</p>
+</section>
+
+<section id="service">
+<h2>事業内容</h2>
+<p class="lead">現場に合わせた仕事を丁寧に行います。</p>
+<div class="services">
+<div class="service">
+<h3>農業</h3>
+<p>米・麦・大豆などの生産を通じ、地域の農地を活用し、農業を支えます。</p>
+<img src="KIMG3395.JPG" alt="大豆コンバイン" style="width:100%; max-width:400px; height:auto; border-radius:12px; margin-top:20px;">
+</div>
+<div class="service">
+<h3>作業委託</h3>
+<p>農地での作業委託に対応します。作業内容はご相談ください。</p>
+<img src="KIMG2487.JPG" alt="乾燥機" style="width:80%; max-width:300px; height:auto; border-radius:12px; margin-top:20px;">
+</div>
+</section>
+
+<section id="photos">
+<h2>仕事の風景</h2>
+<p class="lead">日々の仕事や現場の様子をご紹介します。</p>
+<div class="photo-note">
+<div class="photo-slider">
+
+ <div class="photo-card">
+   <img src="KIMG2757.JPG" alt="稲刈り作業">
+   <h3>稲刈り作業</h3>
+   <p>大型コンバインを使用して稲の収穫作業を行い、ダンプで運搬しています。</p>
+ </div>
+
+ <div class="photo-card">
+  <img src="KIMG1595.JPG" alt="大豆収穫作業">
+  <h3>大豆収穫作業</h3>
+  <p>大豆の生育状況を確認しながら、適期収穫に取り組んでいます。</p>
+ </div>
+</div>
+<div id="photo-modal" onclick="closePhoto()">
+<span class="photo-close">×</span>
+<img id="modal-image" src="" alt="拡大写真">
+</div>
+
+<style>
+#photo-modal {
+display: none;
+position: fixed;
+inset: 0;
+z-index: 100001;
+background: rgba(0, 0, 0, 0.92);
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+
+#photo-modal.show {
+display: flex;
+}
+
+#modal-image {
+max-width: 95%;
+max-height: 85vh;
+object-fit: contain;
+border-radius: 8px;
+}
+
+.photo-close {
+position: absolute;
+top: 15px;
+right: 25px;
+color: white;
+font-size: 45px;
+cursor: pointer;
+}
+</style>
+<style>
+.photo-slider {
+display: flex;
+gap: 15px;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+padding: 10px 0 20px;
+-webkit-overflow-scrolling: touch;
+}
+
+.photo-slider img {
+flex: 0 0 85%;
+width: 85%;
+max-width: 400px;
+height: 280px;
+object-fit: cover;
+border-radius: 12px;
+scroll-snap-align: center;
+}
+.photo-card {
+flex: 0 0 85%;
+max-width: 400px;
+background: #ffffff;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+scroll-snap-align: center;
+}
+ 
+.photo-card img {
+width: 100%;
+height: 250px;
+object-fit: cover;
+display: block;
+border-radius: 0;
+margin: 0;
+}
+
+.photo-card h3 {
+font-size: 20px;
+margin: 15px 15px 8px;
+color: #315b35;
+}
+
+.photo-card p {
+font-size: 14px;
+line-height: 1.8;
+margin: 0 15px 18px;
+}
+ .photo-card {
+flex: 0 0 85%;
+max-width: 400px;
+background: #ffffff;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+scroll-snap-align: center;
+}
+
+.photo-card img {
+width: 100%;
+height: 250px;
+object-fit: cover;
+display: block;
+border-radius: 0;
+margin: 0;
+}
+
+.photo-card h3 {
+font-size: 20px;
+margin: 15px 15px 8px;
+color: #315b35;
+}
+
+.photo-card p {
+font-size: 14px;
+line-height: 1.8;
+margin: 0 15px 18px;
+color:#555555;
+}
+</style>
+</section>
+
+<section id="company">
+<h2>会社概要</h2>
+<p>会社名：株式会社加藤農場</p>
+<p>2007年　　　ライスセンター竣工</p>
+<p>2011年　　　農林水産大臣賞受賞(個人経営部門)</p>
+<p>2024年　　　会社設立</p>
+<p>2026年　　　ビーンセンター竣工</p>
+<p>代表者：代表取締役　加藤剛</p>
+<p>従業員数：9名</p>
+<p>事業内容：農地請負、農作業代行、水稲・小麦・大豆の栽培管理、露地野菜の生産販売</p>
+<p>所在地：(株)加藤農場ライスセンター(三重県四日市市上海老町2145)</p>
+<div class="access-card">
+  
+<div class="access-map">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3267.623372553458!2d136.55781567518707!3d35.01613197280945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6003935fcc00e02b%3A0x780e78055eed4901!2zKOagqinliqDol6TovrLloLTjg6njgqTjgrnjgrvjg7Pjgr_jg7w!5e0!3m2!1sja!2sjp!4v1793873823694!5m2!1sja!2sjp"
+    width="100%"
+    height="100%"
+    style="border:0;"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin">
+  </iframe>
+</div>
+
+<div class="access-info">
+ 
+<div class="access-label">LOCATION</div>
+
+<h3>株式会社加藤農場</h3>
+
+<div class="access-address">
+<span>〒512-1201</span>
+<p>
+三重県四日市市<br>
+上海老町2145
+</p>
+</div>
+
+<a
+class="access-route"
+href="https://www.google.com/maps/dir/?api=1&destination=三重県四日市市上海老町2145&travelmode=driving"
+target="_blank"
+rel="noopener noreferrer">
+
+<span>会社までのルートを確認</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+.access-page {
+padding: 80px 5%;
+background: #f6f8f3;
+color: #263b28;
+}
+
+.access-heading {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.access-heading span {
+color:#68964b;
+font-size: 13px;
+letter-spacing: 5px;
+font-weight: bold;
+}
+
+.access-heading h2 {
+font-size: 34px;
+margin: 10px 0;
+}
+
+.access-heading p {
+color: #788575;
+font-size: 14px;
+}
+
+.access-card {
+max-width: 1100px;
+margin: auto;
+background: #fff;
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 0 8px 30px rgba(0,0,0,.06);
+}
+
+.access-map {
+width: 100%;
+height: 600px;
+}
+
+.access-map iframe {
+display: block;
+width: 100%;
+height: 100%;
+border: 0;
+}
+
+.access-info {
+padding: 35px 40px;
+}
+
+.access-label {
+color: #68964b;
+font-size: 12px;
+letter-spacing: 3px;
+font-weight: bold;
+}
+
+.access-info h3 {
+font-size: 23px;
+margin: 12px 0 20px;
+}
+
+.access-address {
+border-top: 1px solid #e5e9e2;
+border-bottom: 1px solid #e5e9e2;
+padding: 18px 0;
+}
+
+.access-address span {
+font-size: 13px;
+color: #777;
+}
+
+.access-address p {
+font-size: 17px;
+line-height: 1.9;
+margin: 8px 0;
+}
+
+.access-route {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 380px;
+margin-top: 25px;
+padding: 17px 22px;
+background: #568d3c;
+color: white;
+text-decoration: none;
+border-radius: 7px;
+font-size: 14px;
+font-weight: bold;
+transition: .3s;
+}
+
+.access-route:hover {
+background: #3f6f2c;
+}
+
+@media (max-width: 600px) {
+
+.access-page {
+padding: 45px 16px;
+}
+
+.access-heading {
+margin-bottom: 25px;
+}
+
+.access-heading h2 {
+font-size: 27px;
+}
+
+.access-card {
+border-radius: 12px;
+}
+
+.access-map {
+height: 450px;
+}
+
+.access-info {
+padding: 25px 20px 30px;
+}
+
+.access-info h3 {
+font-size: 20px;
+}
+
+.access-address p {
+font-size: 16px;
+}
+
+.access-route {
+max-width: none;
+width: 100%;
+box-sizing: border-box;
+padding: 17px;
+}
+}
+</style>
+ 
+</section>
+ 
+<section id="job">
+<h2>採用情報</h2>
+<p class="lead">私たちの仕事に興味を持ち、熱意のある正社員を募集しています。</p>
+<div class="service">
+<h3>仕事内容</h3>
+<p>【農業機械オペレーターおよび農作業】</p>
+<p>・水稲、小麦、大豆の生産・販売</p>
+<p>・大型農業機械による作業やあぜ草刈りなどの管理作業</p>
+<p>※体力を使う仕事が多いです。</p>
+</div>
+<div class="service">
+<h3>勤務地</h3>
+<p>(株)加藤農場ライスセンター及び周辺農地</p>
+<p>三重県四日市市上海老町2145</p>
+</div>
+<div class="service">
+<h3>雇用形態</h3>
+<p>正社員</p>
+</div>
+<div class="service">
+<h3>雇用期間</h3>
+<p>雇用期間の定め: なし</p>
+  
+<p>試用期間: あり</p>
+<p>2ヶ月</p>
+<p>※期間中は日給:9,200円(時給1,150円×8時間労働)</p>
+</div>
+<div class="service">
+<h3>勤務時間</h3>
+<p>8:00 〜 17:00(休憩60分)</p>
+<p>実働時間: 8時間00分</p>
+  
+<p>※時期によって休憩時間変動あり</p>
+<p>※時間外勤務あり(月平均5時間程度)</p>
+</div>
+<div class="service">
+<h3>休日</h3>
+<p>年間休日90日程度</p>
+<p>※日曜日・他(1月～3月は週2日休み)</p>
+<p>※他、天候により休みになる日があります</p>
+<p>農閑期(1〜3月)にまとまった休日を取ることが可能です</p>
+</div>
+<div class="service">
+<h3>社会保険</h3>
+<p>雇用保険・労災保険・健康保険・厚生年金</p>
+</div>
+<div class="service">
+<h3>給与</h3>
+<p>月給: 230,000円 〜 300,000円</p>
+<p>《給与モデル》</p>
+<p>3年目:月給260,000円</p>
+<p>6年目:月給310,000円</p>
+<p>※能力・年齢・経験による</p>
+</div>
+<div class="service">
+<h3>待遇</h3>
+<p>昇給あり(10,000円/月、過去実績による)</p>
+<p>賞与あり(年2回、計4.5ヶ月程度(昨年度実績) ※業績により追加で特別賞与あり)</p>
+<p>通勤手当あり(上限10,000/月)</p>
+<p>住宅手当あり(上限10,000/月)</p>
+<p>職務手当あり</p>
+<p>資格手当あり(大特:5,000円/月 中型・大型:3,000円/月 けん引:2,000円/月)</p>
+<p>夏季休暇あり(3日間)</p>
+<p>年末年始休暇あり(5日間)</p>
+<p>有給休暇あり(6ヶ月経過後10日付与)</p>
+<p>連休取得相談可</p>
+<p>資格取得費用の補助あり(全額補助 ※AT限定解除については要相談)</p>
+<p>社員割引制度あり</p>
+<p>作業着の支給あり(希望者に支給)</p>
+<p>マイカー通勤可</p>
+<p>退職金制度あり</p>
+</div>
+<div class="service">
+<h3>寮・社宅</h3>
+<p>なし</p>
+</div>
+<div class="service">
+<h3>応募条件</h3>
+<p>年齢：40歳以下＊長期勤続によるキャリア形成のため</p>
+<p>学歴：不問</p>
+<p>経験：不問</p>
+<p>免許：普通自動車免許(AT限定相談可)(卒業見込みの学生除く)</p>
+<p>＊大型特殊、フォークリフト免許を入社後に取得していただきます(所持者優遇)</p>
+</div>
+<div class="service">
+<h3>応募の流れ</h3>
+<p>原則としてあぐりナビにてお願いいたします。(またはメール：taiki.kato448121@gmail.com)</p>
+<p>選考フロー：応募→書類選考→面接→採用</p>
+</div>
+<div class="service">
+<h3>受動喫煙防止措置の状況</h3>
+<p>屋外喫煙可(屋外で就業)</p>
+<p>＊作業中は禁煙</p>
+</div>
+</section>
+
+<section id="contact" class="contact">
+<h2>お問い合わせ</h2>
+<p>農業あるいは弊社について、お気軽にご相談ください。</p>
+<p>Tel:090-4409-6693</p>
+<p>Email:taiki.kato448121@gmail.com</p>
+</section>
+  
+</main>
+
+</script>
+<style>
+.footer-menu {
+ max-width: 900px;
+ margin: 0 auto;
+ padding: 70px 7% 40px;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 35px 30px;
+ background: #fff;
+}
+
+.footer-menu a {
+ color: #78b936;
+ font-size: 21px;
+ letter-spacing: 1.5px;
+ text-decoration: none;
+ font-weight: 500;
+ transition: 0.3s;
+}
+
+.footer-menu a:hover {
+ opacity: 0.6;
+ transform: translateX(5px);
+}
+
+ .footer-menu a::before {
+ content: "›";
+ margin-right: 12px;
+}
+
+.footer-top {
+ max-width: 900px;
+ margin: 20px auto 50px;
+ padding: 0 7%;
+ display: flex;
+ justify-content: flex-end;
+}
+
+.footer-top a {
+ width: 85px;
+ height: 85px;
+ border-radius: 50%;
+ background: #80bc32;
+ color: white;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: 38px;
+ text-decoration: none;
+}
+
+.footer-copyright {
+ border-top: 1px solid #eee;
+ padding: 25px 10px;
+ text-align: center;
+ color: #888;
+ font-size: 12px;
+}
+
+@media (max-width: 600px) {
+ .footer-menu {
+  padding: 55px 8% 30px;
+  gap: 30px 12px;
+ }
+
+ .footer-menu a {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+ }
+
+ .footer-menu a::before {
+  margin-right: 6px;
+ }
+
+ .footer-top a {
+  width: 70px;
+  height: 70px;
+ }
+}
+a[href^="tel:"] {
+  color: #000000;
+  text-decoration: none;
+}
+</style>
+<script>
+document.querySelectorAll(".photo-slider img").forEach(img => {
+img.style.cursor = "pointer";
+
+img.addEventListener("click", function() {
+document.getElementById("modal-image").src = this.src;
+document.getElementById("photo-modal").classList.add("show");
+});
+});
+
+function closePhoto() {
+document.getElementById("photo-modal").classList.remove("show");
+document.getElementById("modal-image").src = "";
+}
+</script>
+
+ <nav class="footer-menu">
+  <a href="#top">HOME</a>
+  <a href="#about">私たちについて</a>
+  <a href="#service">事業内容</a>
+  <a href="#company">会社概要</a>
+  <a href="#job">採用情報</a>
+  <a href="#contact">お問い合わせ</a>
+</nav>
+
+<footer>
+&copy; 株式会社加藤農場 All Rights Reserved.
+</footer>
+<div class="fixed-buttons">
+ 
+ <a href="https://www.instagram.com/k.noujou/"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="instagram-button">
+  Instagram
+ </a>
+
+ <a href="#top" 
+  class="page-top-button"
+  aria-label="ページの先頭へ">
+  ↑
+ </a>
+
+</div>
+
+<style>
+ .fixed-buttons {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+ }
+
+.instagram-button {
+ background: linear-gradient(
+  45deg,
+  #feda75 0%,
+  #fa7e1e 25%,
+  #d62976 50%,
+  #962fbf 75%,
+  #4f5bd5 100%
+ );
+ color: white;
+ padding: 12px 20px;
+ border: none;
+ border-radius: 30px;
+ text-decoration: none;
+ font-size: 14px;
+ font-weight: bold;
+ box-shadow: none; 
+}
+
+.page-top-button {
+ width: 46px;
+ height: 46px;
+ background: rgba(255,255,255,0.9);
+ color:#426B3C;
+ border: 1.5px solid #426B3C;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-decoration: none;
+ font-size: 24px;
+ font-weight: normal;
+ box-shadow: none;
+ transition: 0.3s;
+}
+</style>
+
+</body>
+</html>
