@@ -237,9 +237,25 @@ background: #263f2d;
 font-size: 13px;
 }
 @media (max-width: 600px) {
-header { justify-content: center; }
-nav a { margin: 0 6px; }
-.hero { padding: 65px 6%; }
+ header {
+  justify-content: center;
+ }
+
+ nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 16px;
+ }
+
+ nav a {
+  margin: 0;
+  white-space: nowrap;
+ }
+
+ .hero {
+  padding: 65px 6%;
+ }
 }
  
 @keyframes rice-sway {
