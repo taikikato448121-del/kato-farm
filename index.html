@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<meta charset="UTF-8">
 <style>
 #opening {
 position: fixed;
@@ -52,78 +53,6 @@ transition: none;
 }
 </style>
 
-<div id="opening">
-<img id="opening-logo" src="スクリーンショット 2024-02-28 084242.png" alt="会社ロゴ">
-</div>
-
-<script>
-(() => {
-const opening = document.getElementById("opening");
-const logo = document.getElementById("opening-logo");
-
-const grains = [
-"画像1kome.png",
-"画像2mugi.png",
-"画像3daizu.png"
-];
-
-function createGrain() {
-if (!opening.isConnected) return;
-
-const grain = document.createElement("img");
-
-grain.className = "grain";
-grain.src = grains[
-Math.floor(Math.random() * grains.length)
-];
-
-const duration = 4 + Math.random() * 4;
-
-grain.style.left = Math.random() * 100 + "vw";
-grain.style.width = (12 + Math.random() * 20) + "px";
-grain.style.animationDuration = duration + "s";
-
-grain.style.setProperty(
-"--sway",
-(Math.random() * 200 - 100) + "px"
-);
-
-grain.style.setProperty(
-"--rotation",
-(Math.random() * 720 - 360) + "deg"
-);
-
-opening.appendChild(grain);
-
-setTimeout(() => grain.remove(), duration * 1000);
-}
-
-// 最初から大量に降らせる
-for (let i = 0; i < 100; i++) {
-setTimeout(createGrain, Math.random() * 3000);
-}
-
-// 追加で降らせる
-const rain = setInterval(createGrain, 100);
-
-// ロゴをゆっくり消す
-setTimeout(() => {
-logo.style.opacity = "0";
-}, 4500);
-
-// ホームページを見せる
-setTimeout(() => {
-clearInterval(rain);
-opening.classList.add("hide");
-}, 6500);
-
-// オープニング画面を削除
-setTimeout(() => {
-opening.remove();
-}, 9500);
-
-})();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>株式会社加藤農場｜農業・四日市</title>
@@ -304,6 +233,119 @@ font-size: 13px;
   white-space: nowrap;
   border: 0;
 }
+
+#strengths {
+position: relative;
+width: 100%;
+height: 600vh;
+min-height: 600vh;
+max-width: none;
+padding: 0;
+margin: 0;
+overflow: visible;
+isolation: isolate;
+}
+
+#strengths-stage {
+position: sticky;
+top: 0;
+width: 100%;
+height: 100vh;
+overflow: hidden;
+background: #transparent;
+}
+
+#strengths-background {
+position: absolute;
+inset: 0;
+z-index: 0;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+#strengths-stage::after {
+content: "";
+position: absolute;
+inset: 0;
+z-index: 1;
+background: rgba(0, 0, 0, 0.42);
+pointer-events: none;
+}
+
+#strengths .strength-panel {
+position: absolute;
+inset: 0;
+z-index: 2;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+min-height: 0;
+padding: 60px 8%;
+background: transparent !important;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.6s ease;
+}
+
+#strengths .strength-panel.active {
+opacity: 1;
+visibility: visible;
+}
+
+#strengths .strength-text {
+position: relative;
+z-index: 3;
+width: 100%;
+max-width: 750px;
+text-align: center;
+color: white;
+}
+
+#strengths .strength-text h2,
+#strengths .strength-text h3,
+#strengths .strength-text p {
+color: white;
+text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+#strengths .strength-text h2 {
+font-size: clamp(32px, 5vw, 52px);
+margin-bottom: 35px;
+}
+
+#strengths .strength-text h3 {
+font-size: clamp(24px, 3vw, 34px);
+margin-bottom: 20px;
+}
+
+#strengths .strength-text p {
+font-size: 17px;
+line-height: 2.2;
+}
+
+#strengths .strength-number {
+letter-spacing: 4px;
+font-size: 13px;
+margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+#strengths-stage {
+height: 100svh;
+}
+
+#strengths .strength-panel {
+padding: 40px 8%;
+}
+
+#strengths .strength-text p {
+font-size: 15px;
+}
+}
+
+
 </style>
 <script type="application/ld+json">
 {
@@ -327,6 +369,80 @@ font-size: 13px;
   <link rel="icon" type="image/jpeg" href="/favicon.jpeg">
 </head>
 <body id="top">
+
+<div id="opening">
+<img id="opening-logo" src="スクリーンショット 2024-02-28 084242.png" alt="会社ロゴ">
+</div>
+
+<script>
+(() => {
+const opening = document.getElementById("opening");
+const logo = document.getElementById("opening-logo");
+
+const grains = [
+"画像1kome.png",
+"画像2mugi.png",
+"画像3daizu.png"
+];
+
+function createGrain() {
+if (!opening.isConnected) return;
+
+const grain = document.createElement("img");
+
+grain.className = "grain";
+grain.src = grains[
+Math.floor(Math.random() * grains.length)
+];
+
+const duration = 4 + Math.random() * 4;
+
+grain.style.left = Math.random() * 100 + "vw";
+grain.style.width = (12 + Math.random() * 20) + "px";
+grain.style.animationDuration = duration + "s";
+
+grain.style.setProperty(
+"--sway",
+(Math.random() * 200 - 100) + "px"
+);
+
+grain.style.setProperty(
+"--rotation",
+(Math.random() * 720 - 360) + "deg"
+);
+
+opening.appendChild(grain);
+
+setTimeout(() => grain.remove(), duration * 1000);
+}
+
+// 最初から大量に降らせる
+for (let i = 0; i < 100; i++) {
+setTimeout(createGrain, Math.random() * 3000);
+}
+
+// 追加で降らせる
+const rain = setInterval(createGrain, 100);
+
+// ロゴをゆっくり消す
+setTimeout(() => {
+logo.style.opacity = "0";
+}, 4500);
+
+// ホームページを見せる
+setTimeout(() => {
+clearInterval(rain);
+opening.classList.add("hide");
+}, 6500);
+
+// オープニング画面を削除
+setTimeout(() => {
+opening.remove();
+}, 9500);
+
+})();
+</script>
+
 <div class="photo-section logo-container" style="pointer-events:none;">
 <img src="稲穂以外 (1).png" alt="株式会社加藤農場のロゴ">
 <img src="稲穂.png" class="稲穂" alt="稲穂">
@@ -336,6 +452,7 @@ font-size: 13px;
 <nav>
 <a href="#about">私たちについて</a>
 <a href="#service">事業内容</a>
+<a href="#strengths">私たちの強み</a>
 <a href="#company">会社概要</a>
 <a href="#job">採用情報</a>
 <a href="#contact">お問い合わせ</a>
@@ -401,7 +518,202 @@ font-size: 13px;
 <p>農地での作業委託に対応します。作業内容はご相談ください。</p>
 <img src="KIMG2487.JPG" alt="乾燥機" style="width:80%; max-width:300px; height:auto; border-radius:12px; margin-top:20px;">
 </div>
+</div>
 </section>
+
+<h2>私たちの強み</h2>
+<p class="lead">株式会社加藤農場の大きな特徴をご紹介します。</p>
+
+<section id="strengths">
+
+ <div id="strengths-stage">
+
+  <div id="strengths-background"></div>
+
+  <div class="strength-panel">
+   <div class="strength-text">
+    <p class="strength-number">01 / SOYBEAN SORTING</p>
+    <h3>高い品質管理能力</h3>
+    <p>
+     大豆選別を主に用途とする倉庫があり、
+     大豆の粗選・通常選別・色彩選別・選粒を経て
+     ゴミや雑草種子・品質のばらつきを極力排除しています。
+    </p>
+   </div>
+  </div>
+
+  <div class="strength-panel">
+   <div class="strength-text">
+    <p class="strength-number">02 / OUR WORKPLACE</p>
+    <h3>清潔な施設</h3>
+    <p>
+    作業場はもちろんのこと、事務所・応接室・トイレなどの
+　　掃除を徹底しており、日々快適に過ごせる環境作りを行っています。
+    </p>
+   </div>
+  </div>
+
+<div class="strength-panel">
+<div class="strength-text">
+ <p class="strength-number">03 / FIELD MANAGEMENT SYSTEM</p>
+ <h3>多様な圃場管理システム</h3>
+ <p>
+ スマホを用いたICTによる圃場管理システムとクリアファイルを用いた
+ アナログ式の圃場管理システムを両立させることで、
+ 各々が働きやすい様に選択肢を設けています。
+ </p>
+</div>
+</div>
+
+<div class="strength-panel">
+<div class="strength-text">
+<p class="strength-number">04 / WORK ENVIRONMENT</p>
+<h3>安定した労働環境</h3>
+<p>
+残業時間は繁忙期を含めて月平均5時間程度と少なく、
+日々の安定した働き方を心がけています。
+</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+const section = document.querySelector("#strengths");
+const stage = document.querySelector("#strengths-stage");
+const panels = document.querySelectorAll(
+"#strengths .strength-panel"
+);
+const background = document.querySelector(
+"#strengths-background"
+);
+
+if (!section || !stage || !background || panels.length !== 4) {
+return;
+}
+
+const images = [
+"大豆の選別.jpeg",
+"事務所の様子2.jpeg",
+"圃場管理システム2.jpeg",
+"若手の仕事.jpg"
+];
+
+images.forEach(function(src) {
+const img = new Image();
+img.src = src;
+});
+
+let currentIndex = -1;
+
+function updateStrength() {
+
+const vh = window.innerHeight;
+const sectionTop =
+section.getBoundingClientRect().top + window.scrollY;
+
+const scrollPosition = window.scrollY;
+const progress = (scrollPosition - sectionTop) / vh;
+
+const totalProgress = Math.max(0, Math.min(6, progress));
+
+const index = Math.min(
+3,
+Math.floor(totalProgress / 1.5)
+);
+
+const localProgress =
+Math.min(1, (totalProgress - index * 1.5) / 1.5);
+
+stage.style.left = "0";
+stage.style.right = "0";
+stage.style.width = "100%";
+stage.style.zIndex = "10";
+
+if (progress < 0) {
+
+stage.style.position = "absolute";
+stage.style.top = "0";
+stage.style.transform = "translateY(0)";
+
+} else if (progress < 6) {
+
+stage.style.position = "fixed";
+stage.style.top = "0";
+
+
+if (index === 3 && localProgress > 0.5) {
+
+const exitMove = (localProgress - 0.5) * 200;
+
+stage.style.transform =
+"translateY(-" + exitMove + "vh)";
+
+} else {
+
+stage.style.transform = "translateY(0)";
+}
+
+} else {
+
+stage.style.position = "absolute";
+stage.style.top = "0";
+stage.style.transform = "translateY(0)";
+}
+
+if (index !== currentIndex) {
+
+currentIndex = index;
+
+background.style.backgroundImage =
+"url('" + images[index] + "')";
+}
+
+
+background.style.height = "100vh";
+background.style.bottom = "0";
+background.style.transform = "translateY(0)";
+background.style.backgroundRepeat = "no-repeat";
+background.style.backgroundPosition = "center";
+background.style.backgroundSize = "cover";
+
+panels.forEach(function(panel, i) {
+
+const text = panel.querySelector(".strength-text");
+
+panel.classList.toggle("active", i === index);
+
+if (i === index) {
+
+const move = 65 - localProgress * 130;
+
+text.style.transform =
+"translateY(" + move + "vh)";
+
+text.style.opacity = "1";
+
+} else {
+
+text.style.transform = "translateY(65vh)";
+text.style.opacity = "0";
+}
+});
+}
+
+window.addEventListener("scroll", updateStrength, {
+passive: true
+});
+
+window.addEventListener("resize", updateStrength);
+
+updateStrength();
+
+});
+</script>
 
 <section id="photos">
 <h2>仕事の風景</h2>
@@ -422,13 +734,13 @@ font-size: 13px;
  </div>
 
  <div class="photo-card">
-  <img src="ドローン.jpeg" alt="防除および追肥作業">
-  <h3>防除および追肥作業</h3>
-  <p>ドローンでの防除や追肥により、農作業の省力化と作物の収量・品質向上を実現しています。</p>
+   <img src="ドローン.jpeg" alt="防除および追肥作業">
+   <h3>防除および追肥作業</h3>
+   <p>ドローンでの防除や追肥により、農作業の省力化と作物の収量・品質向上を実現しています。</p>
  </div>
 
- <div class="photo-card">
-  <img src="田植え.jpeg" alt="田植え作業">
+<div class="photo-card">
+   <img src="田植え.jpeg" alt="田植え作業">
    <h3>田植え時の可変施肥</h3>
    <p>ヤンマーとザルビオが連携した可変施肥システムにより、肥料コスト削減と収量・品質の安定を高めています。</p>
  </div>
@@ -553,6 +865,14 @@ color:#555555;
 }
 </style>
 </section>
+
+
+
+
+
+
+
+
 
 <section id="company">
 <h2>会社概要</h2>
@@ -846,6 +1166,7 @@ padding: 17px;
 <p>原則としてあぐりナビにてお願いいたします。(またはメール：taiki.kato448121@gmail.com)</p>
 <p>選考フロー：応募→書類選考→面接→採用</p>
 <p>社内見学を希望する際は、下記お問い合わせ欄にて記載の連絡先よりご連絡の程よろしくお願いいたします。</p>
+
 </div>
 <div class="service">
 <h3>受動喫煙防止措置の状況</h3>
@@ -968,6 +1289,7 @@ document.getElementById("modal-image").src = "";
   <a href="#top">HOME</a>
   <a href="#about">私たちについて</a>
   <a href="#service">事業内容</a>
+  <a href="#strengths">私たちの強み</a>
   <a href="#company">会社概要</a>
   <a href="#job">採用情報</a>
   <a href="#contact">お問い合わせ</a>
