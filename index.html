@@ -917,68 +917,121 @@ transform: scale(1.35);
 document.addEventListener("DOMContentLoaded", function () {
 
 const slider = document.querySelector(".photo-slider");
-const cards = document.querySelectorAll(".photo-slider .photo-card");
 const dots = document.querySelectorAll(".photo-dot");
 
-if (!slider || cards.length !== 4 || dots.length !== 4) {
-return;
-}
+if (!slider || dots.length !== 4) return;
 
+const originalCards = Array.from(
+slider.querySelectorAll(".photo-card")
+);
+
+if (originalCards.length !== 4) return;
+
+// 最後と最初の写真を複製して両端に配置
+const firstClone = originalCards[0].cloneNode(true);
+const lastClone = originalCards[3].cloneNode(true);
+
+slider.insertBefore(lastClone, originalCards[0]);
+slider.appendChild(firstClone);
+
+const cards = Array.from(
+slider.querySelectorAll(".photo-card")
+);
+
+let currentIndex = 1;
 let ticking = false;
 
+function goTo(index, behavior) {
+const card = cards[index];
+
+slider.scrollTo({
+left: card.offsetLeft -
+(slider.clientWidth - card.clientWidth) / 2,
+behavior: behavior || "smooth"
+});
+}
+
 function updateDots() {
+const center =
+slider.getBoundingClientRect().left +
+slider.clientWidth / 2;
 
-const sliderCenter =
-slider.getBoundingClientRect().left + slider.clientWidth / 2;
+let nearest = 0;
+let distance = Infinity;
 
-let activeIndex = 0;
-let minDistance = Infinity;
-
-cards.forEach(function(card, index) {
-
+cards.forEach((card, index) => {
 const rect = card.getBoundingClientRect();
-const cardCenter = rect.left + rect.width / 2;
-const distance = Math.abs(sliderCenter - cardCenter);
+const d = Math.abs(
+center - (rect.left + rect.width / 2)
+);
 
-if (distance < minDistance) {
-minDistance = distance;
-activeIndex = index;
+if (d < distance) {
+distance = d;
+nearest = index;
 }
 });
 
-dots.forEach(function(dot, index) {
-dot.classList.toggle("active", index === activeIndex);
+currentIndex = nearest;
+
+let dotIndex = nearest - 1;
+
+if (nearest === 0) dotIndex = 3;
+if (nearest === 5) dotIndex = 0;
+
+dots.forEach((dot, index) => {
+dot.classList.toggle("active", index === dotIndex);
 });
 
 ticking = false;
 }
 
-slider.addEventListener("scroll", function() {
+slider.addEventListener("scroll", function () {
 
 if (!ticking) {
 ticking = true;
 requestAnimationFrame(updateDots);
 }
 
+clearTimeout(slider.scrollTimer);
+
+slider.scrollTimer = setTimeout(function () {
+
+const center =
+slider.getBoundingClientRect().left +
+slider.clientWidth / 2;
+
+const rect = cards[currentIndex].getBoundingClientRect();
+
+if (Math.abs(
+center - (rect.left + rect.width / 2)
+) > 30) return;
+
+if (currentIndex === 0) {
+goTo(4, "instant");
+}
+
+if (currentIndex === 5) {
+goTo(1, "instant");
+}
+
+}, 180);
+
 }, { passive: true });
 
-dots.forEach(function(dot, index) {
-
-dot.addEventListener("click", function() {
-
-const card = cards[index];
-
-slider.scrollTo({
-left: card.offsetLeft -
-(slider.clientWidth - card.clientWidth) / 2,
-behavior: "smooth"
+dots.forEach((dot, index) => {
+dot.addEventListener("click", function () {
+goTo(index + 1);
+});
 });
 
+window.addEventListener("resize", function () {
+goTo(currentIndex, "instant");
 });
 
-});
-
+requestAnimationFrame(function () {
+goTo(1, "instant");
 updateDots();
+});
 
 });
 </script>
