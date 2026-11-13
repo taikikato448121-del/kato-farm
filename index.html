@@ -740,6 +740,14 @@ updateStrength();
  </div>
 
 </div>
+
+<div class="photo-dots">
+<button class="photo-dot active" data-index="0"></button>
+<button class="photo-dot" data-index="1"></button>
+<button class="photo-dot" data-index="2"></button>
+<button class="photo-dot" data-index="3"></button>
+</div>
+
 <div id="photo-modal" onclick="closePhoto()">
 <span class="photo-close">×</span>
 <img id="modal-image" src="" alt="拡大写真">
@@ -857,7 +865,124 @@ line-height: 1.8;
 margin: 0 15px 18px;
 color:#555555;
 }
+
+#photos .photo-dots {
+display: none;
+}
+
+@media (max-width: 768px) {
+
+#photos .photo-dots {
+display: flex !important;
+justify-content: center;
+align-items: center;
+gap: 14px;
+width: 100%;
+margin: 15px auto 30px;
+padding: 5px;
+position: relative;
+z-index: 10;
+}
+
+#photos .photo-dots button.photo-dot {
+appearance: none !important;
+-webkit-appearance: none !important;
+display: block !important;
+box-sizing: border-box !important;
+width: 12px !important;
+min-width: 12px !important;
+max-width: 12px !important;
+height: 12px !important;
+min-height: 12px !important;
+padding: 0 !important;
+margin: 0 !important;
+border: 0 !important;
+border-radius: 50% !important;
+background: #c8c8c8 !important;
+box-shadow: none !important;
+font-size: 0 !important;
+line-height: 0 !important;
+cursor: pointer;
+}
+
+#photos .photo-dots button.photo-dot.active {
+background: #315b35 !important;
+transform: scale(1.35);
+}
+}
+
 </style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+const slider = document.querySelector(".photo-slider");
+const cards = document.querySelectorAll(".photo-slider .photo-card");
+const dots = document.querySelectorAll(".photo-dot");
+
+if (!slider || cards.length !== 4 || dots.length !== 4) {
+return;
+}
+
+let ticking = false;
+
+function updateDots() {
+
+const sliderCenter =
+slider.getBoundingClientRect().left + slider.clientWidth / 2;
+
+let activeIndex = 0;
+let minDistance = Infinity;
+
+cards.forEach(function(card, index) {
+
+const rect = card.getBoundingClientRect();
+const cardCenter = rect.left + rect.width / 2;
+const distance = Math.abs(sliderCenter - cardCenter);
+
+if (distance < minDistance) {
+minDistance = distance;
+activeIndex = index;
+}
+});
+
+dots.forEach(function(dot, index) {
+dot.classList.toggle("active", index === activeIndex);
+});
+
+ticking = false;
+}
+
+slider.addEventListener("scroll", function() {
+
+if (!ticking) {
+ticking = true;
+requestAnimationFrame(updateDots);
+}
+
+}, { passive: true });
+
+dots.forEach(function(dot, index) {
+
+dot.addEventListener("click", function() {
+
+const card = cards[index];
+
+slider.scrollTo({
+left: card.offsetLeft -
+(slider.clientWidth - card.clientWidth) / 2,
+behavior: "smooth"
+});
+
+});
+
+});
+
+updateDots();
+
+});
+</script>
+
 </section>
 
 
