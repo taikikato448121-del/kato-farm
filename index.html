@@ -928,17 +928,24 @@ slider.querySelectorAll(".photo-card")
 if (originalCards.length !== 4) return;
 
 // 最後と最初の写真を複製して両端に配置
+
+const isMobile = window.matchMedia(
+"(max-width: 768px)"
+).matches;
+
+if (isMobile) {
 const firstClone = originalCards[0].cloneNode(true);
 const lastClone = originalCards[3].cloneNode(true);
 
 slider.insertBefore(lastClone, originalCards[0]);
 slider.appendChild(firstClone);
+}
 
 const cards = Array.from(
 slider.querySelectorAll(".photo-card")
 );
 
-let currentIndex = 1;
+let currentIndex = isMobile ? 1 : 0;
 let ticking = false;
 
 function goTo(index, behavior) {
@@ -1011,7 +1018,7 @@ goTo(4, "instant");
 }
 
 if (currentIndex === 5) {
-goTo(1, "instant");
+goTo(isMobile ? 1 : 0, "instant");
 }
 
 }, 50);
