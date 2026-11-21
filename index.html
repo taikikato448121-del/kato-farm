@@ -51,6 +51,80 @@ pointer-events: none;
 transition: none;
 }
 }
+
+/* 種子用小麦・大豆の実績表示 */
+.seed-results {
+  margin-top: 30px;
+  padding: 22px 18px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e2e9df;
+}
+
+.seed-results-title {
+  text-align: center;
+  color: #315d3b;
+  font-size: clamp(15px, 2vw, 19px);
+  margin: 0 0 12px;
+  white-space: nowrap;
+}
+
+.seed-results-lead {
+  font-size: 14px;
+  line-height: 1.9;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.seed-results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.seed-result-card {
+  background: #f2f6ef;
+  padding: 22px 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.seed-result-name {
+  font-size: 14px;
+  color: #536b54;
+  margin: 0;
+}
+
+.seed-result-area {
+  font-size: 32px;
+  font-weight: bold;
+  color: #315d3b;
+  margin: 8px 0;
+}
+
+.seed-result-share {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.seed-results-note {
+  font-size: 11px;
+  color: #777;
+  line-height: 1.8;
+  margin: 18px 0 0;
+}
+
+@media (max-width: 600px) {
+  .seed-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seed-results-title {
+    font-size: 16px;
+  }
+}
+
 </style>
 
 <meta charset="UTF-8">
@@ -524,38 +598,49 @@ opening.remove();
 alt="大豆コンバイン"
 style="width:100%; max-width:400px; height:auto; border-radius:12px; margin-top:20px;">
 
-<div style="margin-top:30px; padding:22px 18px; background:#fff; border-radius:10px; border:1px solid #e2e9df;">
+<div class="seed-results">
 
-<h4 style="text-align:center; color:#315d3b; font-size:19px; margin:0 0 12px;">
+<h4 class="seed-results-title">
 種子用小麦・大豆の生産実績
 </h4>
 
-<p style="font-size:14px; text-align:center; margin-bottom:22px;">
+<p class="seed-results-lead">
 R8年度産の種子用小麦・大豆において、
 三重県内で高い作付けシェアを占めています。
 </p>
 
-<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px;">
+<div class="seed-results-grid">
 
-<div style="background:#f2f6ef; padding:18px 10px; border-radius:8px; text-align:center;">
-<p style="font-size:14px; color:#536b54; margin:0;">小麦・あやひかり</p>
-<p style="font-size:30px; font-weight:bold; color:#315d3b; margin:5px 0;">30ha</p>
-<p style="font-size:15px; font-weight:bold; margin:0;">県内シェア 約23.4%</p>
+<div class="seed-result-card">
+<p class="seed-result-name">
+小麦・あやひかり
+</p>
+<p class="seed-result-area">30ha</p>
+<p class="seed-result-share">
+県内シェア 約23.4%
+</p>
 </div>
 
-<div style="background:#f2f6ef; padding:18px 10px; border-radius:8px; text-align:center;">
-<p style="font-size:14px; color:#536b54; margin:0;">大豆・フクユタカ</p>
-<p style="font-size:30px; font-weight:bold; color:#315d3b; margin:5px 0;">30ha</p>
-<p style="font-size:15px; font-weight:bold; margin:0;">県内シェア 約85.7%</p>
+<div class="seed-result-card">
+<p class="seed-result-name">
+大豆・フクユタカ
+</p>
+<p class="seed-result-area">30ha</p>
+<p class="seed-result-share">
+県内シェア 約85.7%
+</p>
 </div>
 
 </div>
 
-<p style="font-size:11px; color:#777; line-height:1.7; margin:18px 0 0;">
-※三重県内全体のR8年度産作付け計画面積：あやひかり128ha、フクユタカ35ha（三重県米麦協会より）
+<p class="seed-results-note">
+※三重県内全体のR8年度産作付け計画面積：
+あやひかり128ha、フクユタカ35ha
+（三重県米麦協会より）
 </p>
 
 </div>
+
 </div>
 
 <div class="service">
